@@ -82,8 +82,8 @@ public class JsonInterpreter {
             }
         }
         info.append("Języki: <br>");
-        for (String lang : langs){
-            info.append("&nbsp&nbsp&nbsp").append(lang).append("<br>");
+        for (int i = 0; i < langs.size(); i++){
+            info.append("&nbsp&nbsp&nbsp").append(langs.get(i)).append(" : ").append(langsBites.get(i).toString()).append("<br>");
         }
         info.append(repos);
         return info.toString();
