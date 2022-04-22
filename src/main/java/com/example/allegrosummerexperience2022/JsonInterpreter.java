@@ -55,6 +55,7 @@ public class JsonInterpreter {
                 reposArray.add(jsonNode.get("name").asText());
             }
         }
+        List<Integer> langsBites = new ArrayList<>();
         List<String> langs = new ArrayList<>();
         StringBuilder repos = new StringBuilder("Repozytoria: <br>");
         for (String repo : reposArray){
@@ -67,11 +68,17 @@ public class JsonInterpreter {
             Iterator<String> itr = repoJson.fieldNames();
             while(itr.hasNext()) {
                 String lang = itr.next();
+                Integer bites = repoJson.get(lang).asInt();
                 System.out.println(repoJson.get(lang).asText());
                 if(!langs.contains(lang)){
                     langs.add(lang);
+                    langsBites.add(bites);
                 }
-                repos.append("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp").append(lang).append(" : ").append(repoJson.get(lang).asText()).append("<br>");
+                else {
+                    int i = langs.indexOf(lang);
+                    langsBites.set(i, langsBites.get(i) + bites);
+                }
+                repos.append("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp").append(lang).append(" : ").append(bites).append("<br>");
             }
         }
         info.append("Języki: <br>");
